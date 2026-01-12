@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork #1</title>
+</head>
+
+<style>
+    body {
+        background-color: cadetblue;
+
+    }
+    #daRedBox {
+        position: absolute;
+        top: 25%;
+        width: 100%;
+        height: 50%;
+        background-color: crimson;
+    }
+
+    .daBlueBox {
+
+        position: absolute;
+        top: 25%;
+        left:25%;
+        width: 50%;
+        height: 50%;
+        background-color: cyan;
+    }
+
+    h1{
+        cursor: cell;
+        position: relative;
+        text-align: center;
+        top: 25%;
+    }
+
+</style>
+
+<body>
+    <div id="daRedBox">
+        <div class="daBlueBox" onclick="daConsole()">
+            <h1 onclick="daAlert()">Click Here!</h1>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Add JavaScript here
+    function daAlert() {
+        alert('Hello there.');
+    }
+
+    function daConsole() {
+        console.log('The div was clicked.');
+    }
+
+
+</script>
+</html>
