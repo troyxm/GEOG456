@@ -46,8 +46,6 @@
             color: crimson;
         }
 
-    
-
     </style>
     <script>  
  
@@ -73,11 +71,11 @@
         <h2 class="teamChant">Roll Tide!</h2>
         `;
 
-    L.geoJSON(stadium, {   // a
-    pointToLayer: function (feature, latlng) { // b
-    return L.marker(latlng, {icon: stadiumIcon});}}) // c
-    .bindPopup(customPopup) // d
-    .addTo(map); // 
+    L.geoJSON(stadium, {   
+    pointToLayer: function (feature, latlng) { 
+    return L.marker(latlng, {icon: stadiumIcon});}}) 
+    .bindPopup(customPopup) 
+    .addTo(map); 
     
     </script>
 </body>
