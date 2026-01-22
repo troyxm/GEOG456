@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryant‑Denny Stadium</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script src="../data/Bryant_Denny_Stadium_copy.js"></script>
+
+</head>
+
+
+<body>
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ width: 1800px; height: 900px; }
+
+        .stadiumName {
+            text-align: center;
+            color: crimson;
+        }
+
+        .stadiumImage {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .teamChant {
+            text-align: center;
+            color: crimson;
+        }
+
+    
+
+    </style>
+    <script>  
+ 
+    var map = L.map('mapid').setView([33.207749, -87.550461], 17); 
+
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //     }).addTo(map);
+
+    L.tileLayer('https://tile.openstreetmap.bzh/ca/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+    // USED OpenStreetMap.CAT TILE LAYER FOR BETTER RESOLUTION IN THE AREA
+
+    // L.marker([33.207749, -87.550461]).addTo(map)
+    //     .bindPopup('This is Bryant-Denny Stadium') // YOU CAN CHANGE THE MESSAGE
+    //     .openPopup();
+    
+    // create custom icon variable
+    var stadiumIcon = L.icon({    
+        iconUrl: '../data/stadium.png',   
+        iconSize: [50,50], // size of the icon
+        popupAnchor: [0,0] // where the icon is located relative to the lat lon of the point. 
+        });
+    
+        var customPopup = `
+        <h1 class ="stadiumName">Bryant-Denny Stadium</h1>
+        <br/>
+        <img src='../data/Real_stadium.jpeg' width='200px' class="stadiumImage"/>
+        <br/>
+        <p class="description">The Bryant-Denny Stadium is home to the Alabama Crimson Tide football team in Tuscaloosa, Alabama.</p>
+        <h2 class="teamChant">Roll Tide!</h2>
+        `;
+
+        // image from: https://yellowhammernews.com/bryant-denny-ranked-no-2-toughest-place-to-play-by-cfb-video-game/
+
+        // Use a backtick ` to create a multi-line string for the popup content
+
+
+  
+
+    L.geoJSON(stadium, {   // a
+    pointToLayer: function (feature, latlng) { // b
+    return L.marker(latlng, {icon: stadiumIcon});}}) // c
+    .bindPopup(customPopup) // d
+    .addTo(map); // 
+    
+    // end of script
+    </script>
+</body>
+</html>
+
+<!-- 33.20774994077126, -87.55046157424712 = Bryant-Denny Stadium coordinates   33.207731987344914, -87.5504401165744-->
+
+
+
+
+
+
+
