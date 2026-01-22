@@ -53,25 +53,15 @@
  
     var map = L.map('mapid').setView([33.207749, -87.550461], 17); 
 
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    //     }).addTo(map);
 
     L.tileLayer('https://tile.openstreetmap.bzh/ca/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        
-    // USED OpenStreetMap.CAT TILE LAYER FOR BETTER RESOLUTION IN THE AREA
 
-    // L.marker([33.207749, -87.550461]).addTo(map)
-    //     .bindPopup('This is Bryant-Denny Stadium') // YOU CAN CHANGE THE MESSAGE
-    //     .openPopup();
-    
-    // create custom icon variable
     var stadiumIcon = L.icon({    
         iconUrl: '../data/stadium.png',   
-        iconSize: [50,50], // size of the icon
-        popupAnchor: [0,0] // where the icon is located relative to the lat lon of the point. 
+        iconSize: [50,50], 
+        popupAnchor: [0,0] 
         });
     
         var customPopup = `
@@ -83,25 +73,16 @@
         <h2 class="teamChant">Roll Tide!</h2>
         `;
 
-        // image from: https://yellowhammernews.com/bryant-denny-ranked-no-2-toughest-place-to-play-by-cfb-video-game/
-
-        // Use a backtick ` to create a multi-line string for the popup content
-
-
-  
-
     L.geoJSON(stadium, {   // a
     pointToLayer: function (feature, latlng) { // b
     return L.marker(latlng, {icon: stadiumIcon});}}) // c
     .bindPopup(customPopup) // d
     .addTo(map); // 
     
-    // end of script
     </script>
 </body>
 </html>
 
-<!-- 33.20774994077126, -87.55046157424712 = Bryant-Denny Stadium coordinates   33.207731987344914, -87.5504401165744-->
 
 
 
