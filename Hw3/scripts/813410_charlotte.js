@@ -42,20 +42,40 @@ var organizations =
 
 var map = L.map('mapid').setView([35.1781, -80.8070], 11); 
 
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
 var mapIcon = L.icon({
     iconUrl: '../data/pin.png',
     iconSize: [25, 25],
     popupAnchor: [0, 0]
 });
 
+// Add layers
+// https://leafletjs.com/examples/layers-control/
+
+var stadiaSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties["Company Name"]) {
+        layer.bindPopup("<b>Company Name:</b> " + feature.properties["Company Name"] + "<br><b>Street Address:</b> " + feature.properties["Street Address"] + "<br><b>City:</b> " + feature.properties["City"] + "<br><b>Line of Business:</b> " + feature.properties["Line of Business"]);
+    }
+}
+
+
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+
 L.geoJSON(organizations, {
     pointToLayer: function (feature, latlng) {
         return L.marker(latlng, {icon: mapIcon});
-    }}).addTo(map);
+    },
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
 
     
 
