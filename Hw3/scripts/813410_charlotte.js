@@ -40,7 +40,8 @@ var organizations =
 }
 
 
-var map = L.map('mapid').setView([35.1781, -80.8070], 11); 
+// var map = L.map('mapid').setView([35.1781, -80.8070], 11); 
+
 
 var mapIcon = L.icon({
     iconUrl: '../data/pin.png',
@@ -51,8 +52,20 @@ var mapIcon = L.icon({
 // Add layers
 // https://leafletjs.com/examples/layers-control/
 
-var stadiaSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+var Stadia_StamenTerrain = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 0,
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'png'
+});
+
+
+
+var Stadia_Outdoors = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 0,
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'png'
 });
 
 
@@ -62,21 +75,30 @@ function onEachFeature(feature, layer) {
     }
 }
 
-
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-
-L.geoJSON(organizations, {
+var mapID = L.geoJSON(organizations, {
     pointToLayer: function (feature, latlng) {
         return L.marker(latlng, {icon: mapIcon});
     },
     onEachFeature: onEachFeature
-}).addTo(map);
+}); 
+
+var map = L.map('mapid', {
+    center: [35.1781, -80.8070],
+    zoom: 11,
+    layers: [Stadia_StamenTerrain, mapID]
+});
 
 
+var baseMaps = {
+    "Stamen Terrain":Stadia_StamenTerrain,
+    "Stadia Outdoors":Stadia_Outdoors
+};
 
-    
+var overlayMaps = {
+    "Organizations": mapID
+};
 
-    
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
