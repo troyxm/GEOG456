@@ -26,13 +26,15 @@
     </style>
 
     <script>
-    var map = L.map('mapid').setView([25.0, -90.0], 5);
+    var map = L.map('mapid').setView([25.0, -104.0],5); 
+    
 
     L.tileLayer('https://tile.openstreetmap.bzh/ca/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-    var hurricanIcon = L.icon({    
+
+    var hurricaneIcon = L.icon({    
         iconUrl: '../data/icon.png',   
         iconSize: [50,50], 
         popupAnchor: [0,0] 
@@ -40,13 +42,13 @@
     
     L.geoJSON(points, {
         pointLayer:function(feature, latlng){
-            return L.marker(latlng, {icon: hurricanIcon});
+            return L.marker(latlng, {icon: hurricaneIcon});
         },
         onEachFeature: function(feature, layer){
             var customPopup = `
-            <h1> ${feature.properties.Name} </h1>
+            <h1> Topical Storm Tara </h1>
             <h3> <img src = "../data/tara.jpg" width="300px"> </h3>
-            `
+            `;
             layer.bindPopup(customPopup);
         }
     }).addTo(map);
