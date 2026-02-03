@@ -35,13 +35,13 @@
 
 
     var hurricaneIcon = L.icon({    
-        iconUrl: '../data/icon.png',   
+        iconUrl: '../data/hurricane.png',   
         iconSize: [50,50], 
         popupAnchor: [0,0] 
-        });    
+        }); 
     
     L.geoJSON(points, {
-        pointLayer:function(feature, latlng){
+        pointToLayer:function(feature, latlng){
             return L.marker(latlng, {icon: hurricaneIcon});
         },
         onEachFeature: function(feature, layer){
