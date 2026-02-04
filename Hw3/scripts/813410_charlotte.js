@@ -40,17 +40,17 @@ var organizations =
 }
 
 var mapIcon = L.icon({
-    iconUrl: '../data/pin.png',
-    iconSize: [25, 25],
+    iconUrl: '../data/org.png',
+    iconSize: [35,35],
     popupAnchor: [0, 0]
 });
 
 // Add layers
 // https://leafletjs.com/examples/layers-control/
 
-var OpenStreetMap_CAT = L.tileLayer('https://tile.openstreetmap.bzh/ca/{z}/{x}/{y}.png', {
+var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="https://www.openstreetmap.cat" target="_blank">Breton OpenStreetMap Team</a>'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 
 
@@ -64,7 +64,13 @@ var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles
 
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties["Company Name"]) {
-        layer.bindPopup("<b>Company Name:</b> " + feature.properties["Company Name"] + "<br><b>Street Address:</b> " + feature.properties["Street Address"]);
+        var customPopup = `
+        <h1 class="company-name">${feature.properties["Company Name"]}</h1>
+        <h2 class="address">${feature.properties["Street Address"]}</h2>
+        <h2 class = "naics-code">NAICS Code: ${feature.properties["Primary NAICS"]}</h2>
+    
+        `;
+        layer.bindPopup(customPopup);
     }
 }
 
@@ -78,12 +84,12 @@ var mapID = L.geoJSON(organizations, {
 var map = L.map('mapid', {
     center: [35.1781, -80.8070],
     zoom: 11,
-    layers: [OpenStreetMap_CAT, mapID]
+    layers: [OpenStreetMap_HOT, mapID]
 });
 
 
 var baseMaps = {
-    "OpenStreetMap CAT": OpenStreetMap_CAT,
+    "OpenStreetMap HOT": OpenStreetMap_HOT,
     "Carto Voyager": CartoDB_Voyager
 };
 
@@ -93,3 +99,4 @@ var overlayMaps = {
 
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
+map.fitBounds(mapID.getBounds());
