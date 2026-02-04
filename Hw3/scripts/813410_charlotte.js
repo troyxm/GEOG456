@@ -39,10 +39,6 @@ var organizations =
 ]
 }
 
-
-// var map = L.map('mapid').setView([35.1781, -80.8070], 11); 
-
-
 var mapIcon = L.icon({
     iconUrl: '../data/pin.png',
     iconSize: [25, 25],
@@ -68,7 +64,7 @@ var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles
 
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties["Company Name"]) {
-        layer.bindPopup("<b>Company Name:</b> " + feature.properties["Company Name"] + "<br><b>Street Address:</b> " + feature.properties["Street Address"] + "<br><b>City:</b> " + feature.properties["City"] + "<br><b>Line of Business:</b> " + feature.properties["Line of Business"]);
+        layer.bindPopup("<b>Company Name:</b> " + feature.properties["Company Name"] + "<br><b>Street Address:</b> " + feature.properties["Street Address"]);
     }
 }
 
