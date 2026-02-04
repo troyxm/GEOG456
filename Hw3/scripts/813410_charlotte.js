@@ -52,18 +52,17 @@ var mapIcon = L.icon({
 // Add layers
 // https://leafletjs.com/examples/layers-control/
 
-var Stadia_StamenTerrain = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
-    minZoom: 0,
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+var OpenStreetMap_CAT = L.tileLayer('https://tile.openstreetmap.bzh/ca/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="https://www.openstreetmap.cat" target="_blank">Breton OpenStreetMap Team</a>'
 });
 
 
 
-var Stadia_Outdoors = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
-    minZoom: 0,
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20
 });
 
 
@@ -83,13 +82,13 @@ var mapID = L.geoJSON(organizations, {
 var map = L.map('mapid', {
     center: [35.1781, -80.8070],
     zoom: 11,
-    layers: [Stadia_StamenTerrain, mapID]
+    layers: [OpenStreetMap_CAT, mapID]
 });
 
 
 var baseMaps = {
-    "Stamen Terrain":Stadia_StamenTerrain,
-    "Stadia Outdoors":Stadia_Outdoors
+    "OpenStreetMap CAT": OpenStreetMap_CAT,
+    "Carto Voyager": CartoDB_Voyager
 };
 
 var overlayMaps = {
