@@ -41,7 +41,7 @@ var organizations =
 
 var mapIcon = L.icon({
     iconUrl: '../data/org.png',
-    iconSize: [35,35],
+    iconSize: [40,40],
     popupAnchor: [0, 0]
 });
 
