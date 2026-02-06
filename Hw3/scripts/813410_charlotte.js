@@ -65,10 +65,11 @@ var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties["Company Name"]) {
         var customPopup = `
-        <h1 class="company-name">${feature.properties["Company Name"]}</h1>
-        <h2 class="address">${feature.properties["Street Address"]}</h2>
-        <h2 class = "naics-code">NAICS Code: ${feature.properties["Primary NAICS"]}</h2>
-    
+            <div class ="container">
+                <h1 class="company-name">${feature.properties["Company Name"]}</h1>
+                <h2 class="address">${feature.properties["Street Address"]}</h2>
+                <h3 class = "naics-code">NAICS Code: ${feature.properties["Primary NAICS"]}</h3>
+            </div>
         `;
         layer.bindPopup(customPopup);
     }
@@ -97,6 +98,18 @@ var overlayMaps = {
     "Organizations": mapID
 };
 
-
-L.control.layers(baseMaps, overlayMaps).addTo(map);
+var layersControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 map.fitBounds(mapID.getBounds());
+
+
+
+// Optional Code: https://leafletjs.com/examples/choropleth/; also can find in lecture from 2/5
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = ' <img src="../data/org.png" class = "legend-icon"> Civil and Social Organizations';
+    return div;
+};
+
+legend.addTo(map);  
