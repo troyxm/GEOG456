@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Fatal Police Shootings Since Jan.1, 2015</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+        </script>
+    <script src="../scripts/fatal_police_shootings.js"></script>
+
+    <style>
+        body,html {
+            height: 100%;
+            margin: 0;
+    
+        }
+    
+        #mapid {
+            width: 100%;
+            height: 100vh;
+        }
+
+
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    
+
+</head>
+<body>
+    <div id="mapid"></div>
+
+    <table id ="shootings-table">
+        <tr>
+            <th>Date</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Victim's Name</th>
+            <th>Age</th>
+        </tr>
+
+
+    </table>
+
+    <script src="../scripts/shootings.js"></script>
+
+
+    
+</body>
+</html>
+
+<!-- <tr> = table row-->
+<!-- <td> = table data-->
+<!-- <th> = table header--> 
