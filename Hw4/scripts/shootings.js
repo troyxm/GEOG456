@@ -23,7 +23,7 @@ L.geoJSON(data, {
 //     onEachFeature: onEachFeature
 // }).addTo(map);
 
-const myTable = document.getElementById("shootings-table");
+var myTable = document.getElementById("shootings-table");
 
 function myFunction(e) {
     document.querySelectorAll('.input');
@@ -42,11 +42,11 @@ function popTable(feature) {
     var Cell_4 = document.createElement("td");
     var Cell_5 = document.createElement("td");
 
-    var date = features.properties.date;
-    var state = features.properties.state;
-    var city = features.properties.city;
-    var name = features.properties.name;
-    var age = features.properties.age;
+    var date = feature.properties.date;
+    var state = feature.properties.state;
+    var city = feature.properties.city;
+    var name = feature.properties.name;
+    var age = feature.properties.age;
 
     myRow.className = "input";
 
@@ -59,7 +59,7 @@ function popTable(feature) {
     myRow.append(Cell_1);
     myRow.append(Cell_2);
     myRow.append(Cell_3);
-    myRow.appen(Cell_4);
+    myRow.append(Cell_4);
     myRow.append(Cell_5);
 
     myTable.append(myRow);
@@ -67,7 +67,8 @@ function popTable(feature) {
 
 }
 
-// shootings.featues.forEach(feature => popTable(feature));
+shootings.features.forEach(feature => popTable(feature));
+
 
 
 
