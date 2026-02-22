@@ -95,3 +95,7 @@ data.features.forEach(feature => popTable(feature)); // display table
 
 
 // use Table)forEach.html; table2.html for help
+
+
+// links used
+// https://leafletjs.com/examples/geojson/

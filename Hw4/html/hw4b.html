@@ -27,7 +27,9 @@
         }
 
 
-
+        div.table-container {
+            overflow-y: auto;
+        }
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -41,6 +43,10 @@
             padding: 8px;
         }
 
+        tr:hover {
+            background-color: #e6f035;
+        }   
+
         tr:nth-child(even) {
             background-color: #dddddd;
         }
@@ -51,19 +57,20 @@
 <body>
     <div id="mapid"></div>
 
+    <div id="table-container">
+        <table id ="shootings-table">
+            <tr>
+                <th>Date</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Victim's Name</th>
+                <th>Age</th>
+                <th>Body Camera</th>
+            </tr>
 
-    <table id ="shootings-table">
-        <tr>
-            <th>Date</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Victim's Name</th>
-            <th>Age</th>
-            <th>Body Camera</th>
-        </tr>
 
-
-    </table>
+        </table>
+    </div>
 
     <script src="../scripts/shootings.js"></script>
 
@@ -75,3 +82,11 @@
 <!-- <tr> = table row-->
 <!-- <td> = table data-->
 <!-- <th> = table header--> 
+<!-- Links USED
+ 
+https://www.w3schools.com/css/css_table_style.asp
+
+https://www.w3schools.com/css/css_table_responsive.asp
+
+
+-->
