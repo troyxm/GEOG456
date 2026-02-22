@@ -17,11 +17,10 @@ L.geoJSON(data, {
             fillOpacity: 0.8
         });
     }
+    //onEachFeature: onEachFeature
 }).addTo(map);
 
-// L.geoJSON(data, {
-//     onEachFeature: onEachFeature
-// }).addTo(map);
+
 
 var myTable = document.getElementById("shootings-table");
 
@@ -35,41 +34,64 @@ function onEachFeature(feature, layer) {
 }
 
 function popTable(feature) {
-    var myRow = document.createElement("tr"); 
-    var Cell_1 = document.createElement("td");
-    var Cell_2 = document.createElement("td");
-    var Cell_3 = document.createElement("td");
-    var Cell_4 = document.createElement("td");
-    var Cell_5 = document.createElement("td");
+    var myRow = document.createElement("tr");
+    var cell_1 = document.createElement("td");
+    var cell_2 = document.createElement("td");
+    var cell_3 = document.createElement("td");
+    var cell_4 = document.createElement("td");
+    var cell_5 = document.createElement("td");
+    var cell_6 = document.createElement("td");
 
     var date = feature.properties.date;
     var state = feature.properties.state;
     var city = feature.properties.city;
     var name = feature.properties.name;
     var age = feature.properties.age;
+    var body_camera = feature.properties.body_camera;
 
     myRow.className = "input";
 
-    Cell_1.innerHTML = date;
-    Cell_2.innerHTML = state;
-    Cell_3.innerHTML = city;
-    Cell_4.innerHTML = name;
-    Cell_5.innerHTML = age;
-    
-    myRow.append(Cell_1);
-    myRow.append(Cell_2);
-    myRow.append(Cell_3);
-    myRow.append(Cell_4);
-    myRow.append(Cell_5);
+    cell_1.innerHTML = date;
+    cell_2.innerHTML = state;
+    cell_3.innerHTML = city;
+    cell_4.innerHTML = name;
+    cell_5.innerHTML = age;
+    cell_6.innerHTML = body_camera;
 
+    cell_6.style.backgroundColor = getBackgroundColor(body_camera);
+    cell_6.style.className = getClassName(body_camera);
+
+    myRow.append(cell_1);
+    myRow.append(cell_2);
+    myRow.append(cell_3);
+    myRow.append(cell_4);
+    myRow.append(cell_5);
+    myRow.append(cell_6);
     myTable.append(myRow);
 
 
 }
 
-shootings.features.forEach(feature => popTable(feature));
+
+// assigning background color and class name based on body camera value (true or false)
+
+// 1. If var body_camera === true, then color = green, otherwise color = red
+
+function getBackgroundColor(d) {
+    return d === true ? '#26b326dc' : '#e74141d7';
+}
+
+// 2. If var body_camera === true, then class name = Yes, otherwise class name = No
+
+function getClassName(d) {
+    return d === true ? 'Yes' : 'No';
+}
+
+
+data.features.forEach(feature => popTable(feature)); // display table
+
+// data.features.forEach(feature => popTable(feature)); // commmenting out this line will make the table only populate when you hover over a point, instead of populating the entire table at once.
 
 
 
-
-
+// use Table)forEach.html; table2.html for help
