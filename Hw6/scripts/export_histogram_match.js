@@ -1,5 +1,6 @@
-var yearBefore = "2011"; // represent text to change the data later on easier
-var yearAfter = "2022"; //
+var yearBefore = "2011"; // represent text to change the data later on easier; 1st image
+var yearMiddle = "2017"; // year added for assigment; 2nd image
+var yearAfter = "2022"; // 3rd image
 
 
 // Load and filter the 'Before' dataset (2010`).
@@ -8,6 +9,13 @@ var datasetBefore = ee
   .ImageCollection("USDA/NAIP/DOQQ")
   .filter(ee.Filter.bounds(geometry)) // makes it faster
   .filter(ee.Filter.date(yearBefore + "-01-01", yearBefore + "-12-31"));
+
+// Load and filter the 'Middle' dataset (2017).
+// Filters by the user-drawn 'geometry' boundary and the date range of 2017.; EDITED BY ME
+var datasetMiddle = ee
+  .ImageCollection("USDA/NAIP/DOQQ")
+  .filter(ee.Filter.bounds(geometry))
+  .filter(ee.Filter.date(yearMiddle + "-01-01", yearMiddle + "-12-31"));
 
 // Load and filter the 'After' dataset (2020).
 // Filters by the user-drawn 'geometry' boundary and the date range of 2020.
@@ -19,6 +27,10 @@ var datasetAfter = ee
 // Process the 'Before' imagery: select RGB bands, reduce to median, and clip to the geometry.
 var befImg = datasetBefore.select(["R", "G", "B"]);
 befImg = befImg.median().clip(geometry);
+
+// Process the 'Middle' imagery: select RGB bands, reduce to median, and clip to the geometry.; EDITTED BY ME
+var midImg = datasetMiddle.select(["R", "G", "B"]);
+midImg = midImg.median().clip(geometry);
 
 // Process the 'After' imagery: select RGB bands, reduce to median, and clip to the geometry.
 var aftImg = datasetAfter.select(["R", "G", "B"]);
@@ -88,20 +100,30 @@ var histogramMatch = function (sourceImg, targetImg) {
   );
 };
 
-// Apply the function: Match the colors of the 2012 image (before) to the 2020 image (after).
-var result = histogramMatch(befImg, aftImg);
+
+
+// Apply the function: Match the colors of the 2011 image (before) to the 2022 image (after).
+var resultBefore = histogramMatch(befImg, aftImg);
+
+// Apply the function: Match the colors of the 2017 image (middle) to the 2022 image (after).; EDITED BY ME
+var resultMiddle = histogramMatch(midImg, aftImg); 
 
 // Center the map on the area of interest.
 Map.setCenter(-78.8802, 42.887, 15);
 
 // Add both the 'After' and 'Before' images as map layers so they can be visually compared.
-Map.addLayer(aftImg, trueColorVis, yearAfter);
-Map.addLayer(befImg, trueColorVis, yearBefore);
-Map.addLayer(result, trueColorVis, "Histogram Matched " + yearBefore); // 2011 Color-Corrected Image
+Map.addLayer(aftImg, trueColorVis, yearAfter); // 2022 Image
+Map.addLayer(midImg, trueColorVis, yearMiddle); // 2017 Image; EDITED BY ME
+Map.addLayer(befImg, trueColorVis, yearBefore); // 2011 Image
+
+Map.addLayer(resultBefore, trueColorVis, "Histogram Matched " + yearBefore); // 2011 Color-Corrected Image
+Map.addLayer(resultMiddle, trueColorVis, "Histogram Matched " + yearMiddle); // 2017 Color-Corrected Image
+
+
 
 
 // --- EXPORT DATA TO GOOGLE DRIVE ---
-// Export the 2020 image to the user's Google Drive as a GeoTIFF.
+// Export the 2022 image to the user's Google Drive as a GeoTIFF.
 Export.image.toDrive({
   image: aftImg, // The image object to export
   description: yearAfter, // The name of the file task and output file
@@ -109,10 +131,18 @@ Export.image.toDrive({
   region: geometry, // Geographic boundary to export
 });
 
-// Export the histogram-matched 2012 image to the user's Google Drive.
+// Export the histogram-matched 2017 image to the user's Google Drive.
 Export.image.toDrive({
-  image: result,
-  description: "Histogram Matched" + yearBefore,
+  image: resultMiddle,
+  description: "HistogramMatched_" + yearMiddle,
+  scale: 0.6,
+  region: geometry,
+});
+
+// Export the histogram-matched 2011 image to the user's Google Drive.
+Export.image.toDrive({
+  image: resultBefore,
+  description: "HistogramMatched_" + yearBefore,
   scale: 0.6,
   region: geometry,
 });
