@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW-6b Scroller</title>
+</head>
+<style>
+    body{
+        background-color: black;
+        font-size:20px;
+        height:2000px;
+    
+        
+    }
+    div#image_container{
+        width: 90%;
+        height: 100%;
+        position: fixed;
+        top: 80px;
+        
+    }
+    img{
+        width: 100%;
+        position: absolute;
+    }
+
+    #before{
+        z-index: 1;
+        opacity: 1;
+    }
+
+    #middle {
+        z-index: 2;
+        opacity: 0;
+    }
+    
+    #after{
+        z-index: 3;
+        opacity: 0;
+    }
+#myText{
+    color: aliceblue;
+    top: 80px;
+    display: grid;
+    width: 180px;
+    height: 1000px;
+    grid-template-rows: 100%;
+    /* background-color: rgba(4, 4, 4, 0.5); */
+    position: absolute;
+    right: 0%;
+    margin-left: 50%;
+}
+#yAfter, #yBefore, #yMiddle{
+
+    background-color: rgb(4, 4, 4, 0.5);
+    min-height: 800px;
+    padding: 20px;
+    /* color: brown; */
+}
+#myP{
+    top:0;
+    position: fixed;
+    color: aliceblue;
+}
+
+h1 {
+    color: rgb(0, 171, 114);
+    text-decoration: underline;
+
+}
+h3{
+    color: white;
+    position: fixed;
+    font-size: 29px;
+    top: 10px;
+}
+
+#source {
+    background-color: rgb(4, 4, 4, 0.5);
+    padding:20px;
+    color:rgb(0, 171, 114)
+
+}
+</style>
+
+<body>
+    <h3 id="h3scroll"><strong>Buffalo, NY (2011-2022)</strong></h3><br>
+
+    <p id="myP" style="position:fixed"></p> <br>
+    <div id="image_container">
+        <img id="after" src="../data/images/BuffaloNY_2022.png" alt="">
+        <img id="middle" src="../data/images/BuffaloNY_2017.png" alt="">
+        <img id="before" src="../data/images/BuffaloNY_2011.png" alt="">
+
+</div>
+<div id="myText">
+        <div id="yBefore">
+            <h1>2011</h1>
+            <p>This area shows the Riverbend section of Buffalo, NY before the construction of the Tesla Gigafactory
+                New York. Previously, the land was used a steel mill, owned by Republic Steel, that operated along the Buffalo River on a 86-acre plot of land. </p>
+
+        </div>
+        <div id="yMiddle">
+            <h1>2017</h1>
+            <p>In 2014, the construction of the started and was completed in 2017. The image above shows the changes in landscape from  2011 to 2017.</p>
+
+        </div>
+        <div id="yAfter">
+            <h1>2022</h1>
+            <p>This is the landscape of Gigafactory New York, or Giga New York, as of 2022. The facility is a large producer of the Tesla Solar Roof and Tesla Superchargers.</p>
+        </div>
+
+        <div id ="source">
+            <p>Source: <br>
+                <a href="https://en.wikipedia.org/wiki/Gigafactory_New_York " style= "color:rgb(159, 92, 53)">Wikipedia</a><br>
+            </p>
+        </div>
+</div>
+<script src="../scripts/hw6b_scroller.js"></script>
+
+</body>
+
+</html>

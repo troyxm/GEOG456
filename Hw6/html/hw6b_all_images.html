@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW6b - All Images</title>
+    <style>
+        /* Most CSS created using ChatGPT */
+        body {
+    
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            overflow-x: hidden;
+            /* Prevent overflow: something you might want to have for maps on a cellphone screen */
+            background-color: black;
+            /* Just for demonstration */
+            color: white;
+    
+        }
+    
+        .row {
+            /* width: 600px;  */
+            width: 100%;
+            background-color: rgb(28, 28, 28);
+            /* Just for demonstration */
+            padding: 10px;
+            border: 1px solid black;
+            display: flex;
+        }
+    
+        p {
+            padding-top: 1%;
+            padding-right: 5%;
+            padding-left: 5%;
+        }
+    
+        /* Creates three equal columns */
+        .column {
+            flex: 33.33%;
+            padding: 10px;
+            overflow: hidden;
+            /* Prevent overflow */
+        }
+    </style> 
+</head>
+<body>
+    <h1 style ="text-align: center">Buffalo, NY (2011-2022)</h1>
+    <h1 style ="font-size: 15px">Images Side by Side </h1>
+    <div class="row">
+        <div class="column">
+            <img src="../data/images/BuffaloNY_2011.png" alt="2011" style="width:100%">
+            <p>This area shows the Riverbend section of Buffalo, NY before the construction of the Tesla Gigafactory
+            New York. Previously, the land was used a steel mill, owned by Republic Steel, that operated along the Buffalo River on
+            a 86-acre plot of land.</p>
+        </div>
+        <div class="column">
+            <img src="../data/images/BuffaloNY_2017.png" alt="2017" style="width:100%">
+            <p>In 2014, the construction of the started and was completed in 2017. The image above shows the changes in landscape from
+            2011 to 2017.</p>
+        </div>
+        <div class="column">
+            <img src="../data/images/BuffaloNY_2022.png" alt="2022" style="width:100%">
+            <p>This is the landscape of Gigafactory New York, or Giga New York, as of 2022. The facility is a large producer of the
+            Tesla Solar Roof and Tesla Superchargers.
+
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
